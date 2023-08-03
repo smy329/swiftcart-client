@@ -1,12 +1,13 @@
 import logo from './assets/logo.svg';
-import { Counter } from './features/counter/Counter';
+
 import './App.css';
 import ProductList from './components/ProductList';
+import CategoryFilters from './components/CategoryFilters';
 
 function App() {
   return (
     <div className="App">
-      <ProductList />
+      <CategoryFilters />
     </div>
   );
 }
