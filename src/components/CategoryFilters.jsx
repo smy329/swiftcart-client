@@ -3,6 +3,7 @@ import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid';
 import ProductList from './ProductList';
+import Paginations from './Paginations';
 
 const sortOptions = [
   { name: 'Most Popular', href: '#', current: true },
@@ -161,7 +162,7 @@ const CategoryFilters = () => {
 
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-5">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900">All Products</h1>
 
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
@@ -222,7 +223,7 @@ const CategoryFilters = () => {
             </div>
           </div>
 
-          <section aria-labelledby="products-heading" className="pb-24 pt-6">
+          <section aria-labelledby="products-heading" className="pb-24 pt-0">
             <h2 id="products-heading" className="sr-only">
               Products
             </h2>
@@ -289,6 +290,7 @@ const CategoryFilters = () => {
               </div>
             </div>
           </section>
+          <Paginations />
         </main>
       </div>
     </div>

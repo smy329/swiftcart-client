@@ -64,9 +64,12 @@ const Navbar = () => {
                   className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
+
                   <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
+                <span className="inline-flex items-center rounded-full mb-7 -ml-3 z-10 px-2 py-1 bg-red-50 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
+                  4
+                </span>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
