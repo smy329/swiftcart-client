@@ -1,6 +1,7 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import Cart from '../pages/Checkout/Cart';
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -14,6 +15,7 @@ function classNames(...classes) {
 }
 
 const Navbar = () => {
+  const [showCart, setShowCart] = useState(false);
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -62,11 +64,17 @@ const Navbar = () => {
                 <button
                   type="button"
                   className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  onClick={() => setShowCart(!showCart)}
                 >
                   <span className="absolute -inset-1.5" />
 
                   <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
+                {showCart && (
+                  <div>
+                    <Cart showCart={showCart} setShowCart={setShowCart} />
+                  </div>
+                )}
                 <span className="inline-flex items-center rounded-full mb-7 -ml-3 z-10 px-2 py-1 bg-red-50 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
                   4
                 </span>
