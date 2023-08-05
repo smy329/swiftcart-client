@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const products = [
   {
@@ -52,6 +52,7 @@ const products = [
 const Cart = ({ showCart, setShowCart }) => {
   //const [open, setOpen] = useState(showCart);
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <Transition.Root show={showCart} as={Fragment}>
@@ -80,12 +81,13 @@ const Cart = ({ showCart, setShowCart }) => {
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
+                <Dialog.Panel className="pointer-events-auto w-screen max-w-xl">
                   <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                     <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                       <div className="flex items-start justify-between">
                         <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
                         <div className="ml-3 flex h-7 items-center">
+                          {/* {location.pathname} */}
                           <button
                             type="button"
                             className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
@@ -122,8 +124,19 @@ const Cart = ({ showCart, setShowCart }) => {
                                     <p className="mt-1 text-sm text-gray-500">{product.color}</p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">Qty {product.quantity}</p>
-
+                                    <div>
+                                      <span
+                                        htmlFor="quantity"
+                                        className="mr-5 text-sm font-medium leading-6 text-gray-900"
+                                      >
+                                        Qty
+                                      </span>
+                                      <select name="" id="">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                      </select>
+                                    </div>
                                     <div className="flex">
                                       <button
                                         type="button"
@@ -148,12 +161,18 @@ const Cart = ({ showCart, setShowCart }) => {
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                       <div className="mt-6">
-                        <a
-                          href="#"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                        >
-                          Checkout
-                        </a>
+                        <Link to="/checkout">
+                          <button
+                            type="button"
+                            className="rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 w-full"
+                            onClick={() => {
+                              setShowCart(false);
+                              navigate('/');
+                            }}
+                          >
+                            Checkout
+                          </button>
+                        </Link>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
@@ -167,7 +186,6 @@ const Cart = ({ showCart, setShowCart }) => {
                             }}
                           >
                             Continue Shopping
-                            <span aria-hidden="true"> &rarr;</span>
                           </button>
                         </p>
                       </div>
