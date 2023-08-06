@@ -7,6 +7,7 @@ export const fetchProducts = async () => {
 
 export const fetchProductsByFilters = async (filter) => {
   let queryString = '';
+
   for (let key in filter) {
     queryString += `${key}=${filter[key]}&`;
   }

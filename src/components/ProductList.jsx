@@ -90,10 +90,10 @@ const ProductList = () => {
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700">
-                      <a href={product.thumbnail}>
+                      <div>
                         <span aria-hidden="true" className="absolute inset-0" />
                         {product.title}
-                      </a>
+                      </div>
                     </h3>
                     <div className="mt-1 text-sm text-gray-500 flex items-center">
                       <StarIcon className="h-5 w-5" /> &nbsp; {product.rating}
