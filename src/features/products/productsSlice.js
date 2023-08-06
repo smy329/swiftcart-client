@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchProducts } from './productsAPI';
+import { fetchProducts, fetchProductsByFilters } from './productsAPI';
 
 const initialState = {
   products: [],
@@ -8,10 +8,16 @@ const initialState = {
   error: '',
 };
 
-export const getProducts = createAsyncThunk('products/getVideos', async () => {
+export const getProducts = createAsyncThunk('products/getProducts', async () => {
   const products = await fetchProducts();
-  console.log(products);
+
   return products;
+});
+
+export const getProductsByFilter = createAsyncThunk('products/getProductsByFilter', async (filter) => {
+  const productsByFilter = await fetchProductsByFilters(filter);
+
+  return productsByFilter;
 });
 
 const productSlice = createSlice({
@@ -24,11 +30,24 @@ const productSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getProducts.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.isLoading = false;
         state.products = action.payload;
       })
       .addCase(getProducts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.products = [];
+        state.isError = true;
+        state.error = action.error?.message;
+      })
+      .addCase(getProductsByFilter.pending, (state) => {
+        state.isError = false;
+        state.isLoading = true;
+      })
+      .addCase(getProductsByFilter.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.products = action.payload;
+      })
+      .addCase(getProductsByFilter.rejected, (state, action) => {
         state.isLoading = false;
         state.products = [];
         state.isError = true;
