@@ -79,7 +79,7 @@ const ProductList = ({ isLoading, products, isError, error }) => {
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {isLoading && <Spinner />}
           {products?.map((product) => (
-            <Link key={product.id} to="/product-details">
+            <Link key={product.id} to={`/product-details/${product.id}`}>
               <div className="group relative">
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
                   <img
