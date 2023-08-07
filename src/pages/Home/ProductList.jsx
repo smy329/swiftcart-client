@@ -2,7 +2,7 @@ import { StarIcon } from '@heroicons/react/20/solid';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProducts } from '../features/products/productsSlice';
+import Spinner from '../../components/Spinner';
 
 const oldproducts = [
   {
@@ -61,14 +61,14 @@ const oldproducts = [
   },
 ];
 
-const ProductList = () => {
+const ProductList = ({ isLoading, products, isError, error }) => {
   //in state.products, products is the reducer name
-  const { products, isLoading, isError, error } = useSelector((state) => state.products);
-  const dispatch = useDispatch();
+  //const { products, isError, error } = useSelector((state) => state.products);
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getProducts());
+  // }, [dispatch]);
 
   // new Set() will take only the unique values
   const categories = new Set(products.map((p) => p.category));
@@ -77,6 +77,7 @@ const ProductList = () => {
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-0 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          {isLoading && <Spinner />}
           {products?.map((product) => (
             <Link key={product.id} to="/product-details">
               <div className="group relative">
