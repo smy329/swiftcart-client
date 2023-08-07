@@ -1,9 +1,26 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { newUser } from '../../features/auth/authSlice';
 
 const Signup = () => {
+  const { isError, isLoading, error, loggedInUser } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    dispatch(newUser({ email: data.email, password: data.password }));
+  };
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      {loggedInUser?.email}
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           className="mx-auto h-10 w-auto"
@@ -16,7 +33,7 @@ const Signup = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" action="#" method="POST">
+        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
               Email address
@@ -25,11 +42,17 @@ const Signup = () => {
               <input
                 id="email"
                 name="email"
-                type="email"
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
+                    message: 'Email address is not valid',
+                  },
+                })}
                 autoComplete="email"
-                required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
+              {errors.email && <p className="text-red-500">{errors.email.message}</p>}
             </div>
           </div>
 
@@ -43,12 +66,29 @@ const Signup = () => {
             <div className="mt-2">
               <input
                 id="password"
-                name="password"
+                {...register('password', {
+                  required: 'Please give a strong password',
+                  pattern: {
+                    value:
+                      /^(?=[\x21-\x7E]*[0-9])(?=[\x21-\x7E]*[A-Z])(?=[\x21-\x7E]*[a-z])(?=[\x21-\x7E]*[\x21-\x2F|\x3A-\x40|\x5B-\x60|\x7B-\x7E])[\x21-\x7E]{6,}$/,
+                    message: (
+                      <>
+                        <ul className="list-disc list-inside">
+                          <li>Minimum one [a-z]</li>
+                          <li>Minimum one [A-Z]</li>
+                          <li>Minimum one [0-9]</li>
+                          <li>Minimum one alphanumeric character</li>
+                          <li>6 or more length</li>
+                        </ul>
+                      </>
+                    ),
+                  },
+                })}
                 type="password"
                 autoComplete="current-password"
-                required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
+              {errors.password && <p className="text-red-500">{errors.password.message}</p>}
             </div>
           </div>
 
@@ -61,13 +101,15 @@ const Signup = () => {
 
             <div className="mt-2">
               <input
-                id="confirm-password"
-                name="confirm-password"
+                id="confirmPassword"
+                {...register('confirmPassword', {
+                  required: 'You need to retype the password',
+                  validate: (value, formValues) => value === formValues.password || 'Password did not match',
+                })}
                 type="password"
-                autoComplete="current-password"
-                required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
+              {errors.confirmPassword && <p className="text-red-500">{errors.confirmPassword.message}</p>}
             </div>
           </div>
 

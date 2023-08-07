@@ -49,7 +49,9 @@
       "brand": "Samsung",
       "category": "smartphones",
       "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-      "images": ["https://i.dummyjson.com/data/products/3/1.jpg"],
+      "images": [
+        "https://i.dummyjson.com/data/products/3/1.jpg"
+      ],
       "deleted": true
     },
     {
@@ -731,7 +733,10 @@
       "brand": "Top Sweater",
       "category": "tops",
       "thumbnail": "https://i.dummyjson.com/data/products/40/thumbnail.jpg",
-      "images": ["https://i.dummyjson.com/data/products/40/1.jpg", "https://i.dummyjson.com/data/products/40/2.jpg"]
+      "images": [
+        "https://i.dummyjson.com/data/products/40/1.jpg",
+        "https://i.dummyjson.com/data/products/40/2.jpg"
+      ]
     },
     {
       "id": 41,
@@ -1136,7 +1141,10 @@
       "brand": "SKMEI 9117",
       "category": "mens-watches",
       "thumbnail": "https://i.dummyjson.com/data/products/62/thumbnail.jpg",
-      "images": ["https://i.dummyjson.com/data/products/62/1.jpg", "https://i.dummyjson.com/data/products/62/2.jpg"]
+      "images": [
+        "https://i.dummyjson.com/data/products/62/1.jpg",
+        "https://i.dummyjson.com/data/products/62/2.jpg"
+      ]
     },
     {
       "id": 63,
@@ -1242,7 +1250,10 @@
       "brand": "Luxury Digital",
       "category": "womens-watches",
       "thumbnail": "https://i.dummyjson.com/data/products/68/thumbnail.webp",
-      "images": ["https://i.dummyjson.com/data/products/68/1.jpg", "https://i.dummyjson.com/data/products/68/2.jpg"]
+      "images": [
+        "https://i.dummyjson.com/data/products/68/1.jpg",
+        "https://i.dummyjson.com/data/products/68/2.jpg"
+      ]
     },
     {
       "id": 69,
@@ -1418,7 +1429,9 @@
       "brand": "Fashion Jewellery",
       "category": "womens-jewellery",
       "thumbnail": "https://i.dummyjson.com/data/products/78/thumbnail.jpg",
-      "images": ["https://i.dummyjson.com/data/products/78/thumbnail.jpg"]
+      "images": [
+        "https://i.dummyjson.com/data/products/78/thumbnail.jpg"
+      ]
     },
     {
       "id": 79,
@@ -1431,7 +1444,9 @@
       "brand": "Fashion Jewellery",
       "category": "womens-jewellery",
       "thumbnail": "https://i.dummyjson.com/data/products/79/thumbnail.jpg",
-      "images": ["https://i.dummyjson.com/data/products/79/1.jpg"]
+      "images": [
+        "https://i.dummyjson.com/data/products/79/1.jpg"
+      ]
     },
     {
       "id": 80,
@@ -2387,6 +2402,18 @@
       "addresses": [],
       "role": "admin",
       "id": 3
+    },
+    {
+      "body": "{\"email\":\"admin@admin.com\",\"password\":\"yasir329@NEW\"}",
+      "headers": {
+        "content-type": "application/json"
+      },
+      "id": 4
+    },
+    {
+      "email": "sdkfhsdih@dhfuiksd.com",
+      "password": "yasir329@NEW",
+      "id": 5
     }
   ],
   "cart": [
@@ -2551,7 +2578,9 @@
           "brand": "Samsung",
           "category": "smartphones",
           "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-          "images": ["https://i.dummyjson.com/data/products/3/1.jpg"],
+          "images": [
+            "https://i.dummyjson.com/data/products/3/1.jpg"
+          ],
           "quantity": 2,
           "user": 2
         },
@@ -2809,7 +2838,9 @@
           "brand": "Samsung",
           "category": "smartphones",
           "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-          "images": ["https://i.dummyjson.com/data/products/3/1.jpg"],
+          "images": [
+            "https://i.dummyjson.com/data/products/3/1.jpg"
+          ],
           "quantity": 1,
           "user": 2,
           "id": 1
@@ -2878,7 +2909,9 @@
           "brand": "Samsung",
           "category": "smartphones",
           "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-          "images": ["https://i.dummyjson.com/data/products/3/1.jpg"],
+          "images": [
+            "https://i.dummyjson.com/data/products/3/1.jpg"
+          ],
           "quantity": 1,
           "user": 2,
           "id": 1
