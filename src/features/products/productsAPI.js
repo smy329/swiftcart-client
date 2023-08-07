@@ -5,7 +5,7 @@ export const fetchProducts = async () => {
   return response.data;
 };
 
-export const fetchProductsByFilters = async (filter, sort) => {
+export const fetchProductsByFilters = async (filter, sort, pagination) => {
   // filter = {"category": ["smartphone", "laptop"]}
   // sort = {_sort: "price", _order: "desc"}
 
@@ -26,10 +26,24 @@ export const fetchProductsByFilters = async (filter, sort) => {
   }
 
   //pagination ={_page:1, _limit=10}
-  // for (let key in pagination) {
-  //   queryString += `${key}=${filter[key]}&`;
-  // }
+  // if we explain, here pagination is an object. we have two key _page, _limit.
+  // then how to get value of the key? pagination[key]. pagination[_page] will give us the value 1
+  for (let key in pagination) {
+    queryString += `${key}=${pagination[key]}&`;
+    console.log(
+      'pagination',
+      pagination,
+      'queryString: ',
+      queryString,
+      'key:',
+      key,
+      'pagination[key]:',
+      pagination[key]
+    );
+  }
 
   const response = await axiosInstance.get('/products?' + queryString);
-  return response.data;
+  const data = response.data;
+  const totalItems = await response.headers.get('x-total-count');
+  return { data: { products: data, totalItems: +totalItems } };
 };

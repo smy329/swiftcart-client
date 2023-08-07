@@ -3,6 +3,7 @@ import { fetchProducts, fetchProductsByFilters } from './productsAPI';
 
 const initialState = {
   products: [],
+  totalItems: 0,
   isLoading: false,
   isError: false,
   error: '',
@@ -14,11 +15,14 @@ export const getProducts = createAsyncThunk('products/getProducts', async () => 
   return products;
 });
 
-export const getProductsByFilter = createAsyncThunk('products/getProductsByFilter', async ({ filter, sort }) => {
-  const productsByFilter = await fetchProductsByFilters(filter, sort);
+export const getProductsByFilter = createAsyncThunk(
+  'products/getProductsByFilter',
+  async ({ filter, sort, pagination }) => {
+    const productsByFilter = await fetchProductsByFilters(filter, sort, pagination);
 
-  return productsByFilter;
-});
+    return productsByFilter;
+  }
+);
 
 const productSlice = createSlice({
   name: 'products',
@@ -45,7 +49,8 @@ const productSlice = createSlice({
       })
       .addCase(getProductsByFilter.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.products = action.payload;
+        state.products = action.payload.data.products;
+        state.totalItems = action.payload.data.totalItems;
       })
       .addCase(getProductsByFilter.rejected, (state, action) => {
         state.isLoading = false;

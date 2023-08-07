@@ -3,9 +3,10 @@ import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid';
 import ProductList from './ProductList';
-import Paginations from './Paginations';
+import Pagination from './Pagination';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts, getProductsByFilter } from '../../features/products/productsSlice';
+import { ITEMS_PER_PAGE } from '../../constants/Constants';
 
 const sortOptions = [
   { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
@@ -222,7 +223,7 @@ function classNames(...classes) {
 
 const CategoryFilters = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const { products, isError, isLoading, error } = useSelector((state) => state.products);
+  const { products, isError, isLoading, error, totalItems } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
@@ -254,14 +255,18 @@ const CategoryFilters = () => {
     setSort(sort);
   };
 
-  const handlePage = (e, page) => {
+  const handlePage = (page) => {
     setPage(page);
   };
 
   useEffect(() => {
-    dispatch(getProductsByFilter({ filter, sort }));
-  }, [dispatch, filter, sort]);
+    const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
+    dispatch(getProductsByFilter({ filter, sort, pagination }));
+  }, [dispatch, filter, sort, page]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [totalItems, sort]);
   return (
     <div className="bg-white">
       <div>
@@ -350,7 +355,7 @@ const CategoryFilters = () => {
               </div>
             </div>
           </section>
-          <Paginations />
+          <Pagination page={page} setPage={setPage} handlePage={handlePage} totalItems={totalItems} />
         </main>
       </div>
     </div>
