@@ -1,12 +1,14 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { newUser } from '../../features/auth/authSlice';
 
 const Signup = () => {
   const { isError, isLoading, error, loggedInUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
   const {
     register,
     handleSubmit,
@@ -14,13 +16,17 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
+  let from = location?.state?.from?.pathname || '/';
+
   const onSubmit = (data) => {
     console.log(data);
     dispatch(newUser({ email: data.email, password: data.password }));
+    if (loggedInUser) {
+      navigate(from, { replace: true });
+    }
   };
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-      {loggedInUser?.email}
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           className="mx-auto h-10 w-auto"

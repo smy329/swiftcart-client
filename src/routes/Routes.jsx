@@ -6,6 +6,7 @@ import Signup from '../pages/Signup/Signup';
 import Cart from '../pages/Checkout/Cart';
 import Checkout from '../pages/Checkout/Checkout';
 import ProductDetails from '../pages/ProductDetails/ProductDetails';
+import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
   {
@@ -14,7 +15,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home />,
+        element: (
+          <PrivateRoute>
+            <Home />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/checkout',
