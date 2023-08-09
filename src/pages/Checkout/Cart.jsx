@@ -2,6 +2,8 @@ import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteItemFromCartAsync, updateCartAsync } from '../../features/cart/cartSlice';
 
 const products = [
   {
@@ -54,6 +56,23 @@ const Cart = ({ showCart, setShowCart }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const { items } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  const totalAmount = items.reduce((amount, item) => item.price * item.quantity + amount, 0);
+  console.log(totalAmount);
+  const totalItems = items.reduce((total, item) => item.quantity + total, 0);
+
+  const handleQuantity = (e, item) => {
+    e.preventDefault();
+    dispatch(updateCartAsync({ ...item, quantity: +e.target.value }));
+  };
+
+  const handleRemove = (e, id) => {
+    e.preventDefault();
+    dispatch(deleteItemFromCartAsync(id));
+  };
+
   return (
     <Transition.Root show={showCart} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setShowCart}>
@@ -103,12 +122,12 @@ const Cart = ({ showCart, setShowCart }) => {
                       <div className="mt-8">
                         <div className="flow-root">
                           <ul role="list" className="-my-6 divide-y divide-gray-200">
-                            {products.map((product) => (
-                              <li key={product.id} className="flex py-6">
+                            {items.map((item) => (
+                              <li key={item.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
-                                    src={product.imageSrc}
-                                    alt={product.imageAlt}
+                                    src={item.thumbnail}
+                                    alt={item.title}
                                     className="h-full w-full object-cover object-center"
                                   />
                                 </div>
@@ -116,12 +135,10 @@ const Cart = ({ showCart, setShowCart }) => {
                                 <div className="ml-4 flex flex-1 flex-col">
                                   <div>
                                     <div className="flex justify-between text-base font-medium text-gray-900">
-                                      <h3>
-                                        <a href={product.href}>{product.name}</a>
-                                      </h3>
-                                      <p className="ml-4">{product.price}</p>
+                                      <h3>{item.title}</h3>
+                                      <p className="ml-4">{item.price}</p>
                                     </div>
-                                    <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                                    <p className="mt-1 text-sm text-gray-500">{item.brand}</p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
                                     <div>
@@ -131,16 +148,19 @@ const Cart = ({ showCart, setShowCart }) => {
                                       >
                                         Qty
                                       </span>
-                                      <select name="" id="">
+                                      <select onChange={(e) => handleQuantity(e, item)} value={item.quantity}>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
                                       </select>
                                     </div>
                                     <div className="flex">
                                       <button
                                         type="button"
                                         className="font-medium text-indigo-600 hover:text-indigo-500"
+                                        onClick={(e) => handleRemove(e, item.id)}
                                       >
                                         Remove
                                       </button>
@@ -155,9 +175,13 @@ const Cart = ({ showCart, setShowCart }) => {
                     </div>
 
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                      <div className="flex justify-between text-base font-medium text-gray-900">
+                      <div className="flex justify-between my-2 text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>$262.00</p>
+                        <p>{totalAmount}</p>
+                      </div>
+                      <div className="flex justify-between my-2 text-base font-medium text-gray-900">
+                        <p>Total Items in Cart</p>
+                        <p>{totalItems} Items</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                       <div className="mt-6">

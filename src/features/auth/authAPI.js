@@ -12,9 +12,10 @@ export const checkUser = async (loginInfo) => {
   try {
     const response = await axiosInstance.get('/users?email=' + email);
     const data = response.data;
+
     if (data.length) {
       if (password === data[0].password) {
-        return data;
+        return data[0];
       } else {
         return { error: 'Incorrect Password' };
       }

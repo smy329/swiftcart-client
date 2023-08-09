@@ -20,11 +20,9 @@ const Login = () => {
   let from = location?.state?.from?.pathname || '/';
 
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(checkUserAsync({ email: data.email, password: data.password }));
-    if (loggedInUser) {
-      navigate(from, { replace: true });
-    }
+
+    navigate(from, { replace: true });
   };
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

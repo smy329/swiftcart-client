@@ -14,7 +14,7 @@ export const fetchProductsByFilters = async (filter, sort, pagination) => {
 
   for (let key in filter) {
     const categoryValues = filter[key];
-    console.log(categoryValues);
+    
     if (categoryValues.length) {
       const lastCategoryValue = categoryValues[categoryValues.length - 1];
       queryString += `${key}=${lastCategoryValue}&`;
@@ -30,16 +30,7 @@ export const fetchProductsByFilters = async (filter, sort, pagination) => {
   // then how to get value of the key? pagination[key]. pagination[_page] will give us the value 1
   for (let key in pagination) {
     queryString += `${key}=${pagination[key]}&`;
-    console.log(
-      'pagination',
-      pagination,
-      'queryString: ',
-      queryString,
-      'key:',
-      key,
-      'pagination[key]:',
-      pagination[key]
-    );
+  
   }
 
   const response = await axiosInstance.get('/products?' + queryString);

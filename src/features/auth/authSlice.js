@@ -16,7 +16,6 @@ export const newUser = createAsyncThunk('auth/newUser', async (userData) => {
 
 export const checkUserAsync = createAsyncThunk('auth/checkUser', async (loginInfo) => {
   const response = await checkUser(loginInfo);
-
   return response;
 });
 
@@ -47,6 +46,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.loggedInUser = action.payload;
+      
         state.error = action.payload?.error || '';
       })
       .addCase(checkUserAsync.rejected, (state, action) => {

@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Cart from '../pages/Checkout/Cart';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -16,6 +17,8 @@ function classNames(...classes) {
 }
 
 const Navbar = () => {
+  const { items } = useSelector((state) => state.cart);
+
   const [showCart, setShowCart] = useState(false);
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -78,9 +81,11 @@ const Navbar = () => {
                     <Cart showCart={showCart} setShowCart={setShowCart} />
                   </div>
                 )}
-                <span className="inline-flex items-center rounded-full mb-7 -ml-3 z-10 px-2 py-1 bg-red-50 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
-                  4
-                </span>
+                {items.length > 0 && (
+                  <span className="inline-flex items-center rounded-full mb-7 -ml-3 z-10 px-2 py-1 bg-red-50 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
+                    {items.length}
+                  </span>
+                )}
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">

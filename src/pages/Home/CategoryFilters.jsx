@@ -101,7 +101,7 @@ const CategoryFilters = () => {
 
   const handleSort = (e, option) => {
     const sort = { _sort: option.sort, _order: option.order };
-    console.log('sorting');
+
     setSort(sort);
   };
 
