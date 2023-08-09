@@ -77,7 +77,9 @@ const ProductDetails = () => {
 
   const handleAddToCart = (e) => {
     e.preventDefault();
-    dispatch(addToCartAsync({ ...productDetail, loggedInUser, quantity: 1 }));
+    const newItem = { ...productDetail, loggedInUser, productId: productDetail.id, quantity: 1 };
+    delete newItem['id'];
+    dispatch(addToCartAsync(newItem));
   };
   return (
     <div className="bg-white">

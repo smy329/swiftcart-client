@@ -49,9 +49,7 @@
       "brand": "Samsung",
       "category": "smartphones",
       "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/3/1.jpg"
-      ],
+      "images": ["https://i.dummyjson.com/data/products/3/1.jpg"],
       "deleted": true
     },
     {
@@ -733,10 +731,7 @@
       "brand": "Top Sweater",
       "category": "tops",
       "thumbnail": "https://i.dummyjson.com/data/products/40/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/40/1.jpg",
-        "https://i.dummyjson.com/data/products/40/2.jpg"
-      ]
+      "images": ["https://i.dummyjson.com/data/products/40/1.jpg", "https://i.dummyjson.com/data/products/40/2.jpg"]
     },
     {
       "id": 41,
@@ -1141,10 +1136,7 @@
       "brand": "SKMEI 9117",
       "category": "mens-watches",
       "thumbnail": "https://i.dummyjson.com/data/products/62/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/62/1.jpg",
-        "https://i.dummyjson.com/data/products/62/2.jpg"
-      ]
+      "images": ["https://i.dummyjson.com/data/products/62/1.jpg", "https://i.dummyjson.com/data/products/62/2.jpg"]
     },
     {
       "id": 63,
@@ -1250,10 +1242,7 @@
       "brand": "Luxury Digital",
       "category": "womens-watches",
       "thumbnail": "https://i.dummyjson.com/data/products/68/thumbnail.webp",
-      "images": [
-        "https://i.dummyjson.com/data/products/68/1.jpg",
-        "https://i.dummyjson.com/data/products/68/2.jpg"
-      ]
+      "images": ["https://i.dummyjson.com/data/products/68/1.jpg", "https://i.dummyjson.com/data/products/68/2.jpg"]
     },
     {
       "id": 69,
@@ -1429,9 +1418,7 @@
       "brand": "Fashion Jewellery",
       "category": "womens-jewellery",
       "thumbnail": "https://i.dummyjson.com/data/products/78/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/78/thumbnail.jpg"
-      ]
+      "images": ["https://i.dummyjson.com/data/products/78/thumbnail.jpg"]
     },
     {
       "id": 79,
@@ -1444,9 +1431,7 @@
       "brand": "Fashion Jewellery",
       "category": "womens-jewellery",
       "thumbnail": "https://i.dummyjson.com/data/products/79/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/79/1.jpg"
-      ]
+      "images": ["https://i.dummyjson.com/data/products/79/1.jpg"]
     },
     {
       "id": 80,
@@ -2414,56 +2399,7 @@
       "id": 5
     }
   ],
-  "cart": [
-    {
-      "id": 10,
-      "title": "HP Pavilion 15-DK1056WM",
-      "description": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10",
-      "price": 1099,
-      "discountPercentage": 6.18,
-      "rating": 4.43,
-      "stock": 89,
-      "brand": "HP Pavilion",
-      "category": "laptops",
-      "thumbnail": "https://i.dummyjson.com/data/products/10/thumbnail.jpeg",
-      "images": [
-        "https://i.dummyjson.com/data/products/10/1.jpg",
-        "https://i.dummyjson.com/data/products/10/2.jpg",
-        "https://i.dummyjson.com/data/products/10/3.jpg",
-        "https://i.dummyjson.com/data/products/10/thumbnail.jpeg"
-      ],
-      "loggedInUser": {
-        "email": "user@user.com",
-        "password": "user123@USER",
-        "id": 5
-      },
-      "quantity": 1
-    },
-    {
-      "id": 14,
-      "title": "Non-Alcoholic Concentrated Perfume Oil",
-      "description": "Original Al Munakh® by Mahal Al Musk | Our Impression of Climate | 6ml Non-Alcoholic Concentrated Perfume Oil",
-      "price": 120,
-      "discountPercentage": 15.6,
-      "rating": 4.21,
-      "stock": 114,
-      "brand": "Al Munakh",
-      "category": "fragrances",
-      "thumbnail": "https://i.dummyjson.com/data/products/14/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/14/1.jpg",
-        "https://i.dummyjson.com/data/products/14/2.jpg",
-        "https://i.dummyjson.com/data/products/14/3.jpg",
-        "https://i.dummyjson.com/data/products/14/thumbnail.jpg"
-      ],
-      "loggedInUser": {
-        "email": "user@user.com",
-        "password": "user123@USER",
-        "id": 5
-      },
-      "quantity": 4
-    }
-  ],
+  "cart": [],
   "orders": [
     {
       "items": [
@@ -2604,9 +2540,7 @@
           "brand": "Samsung",
           "category": "smartphones",
           "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-          "images": [
-            "https://i.dummyjson.com/data/products/3/1.jpg"
-          ],
+          "images": ["https://i.dummyjson.com/data/products/3/1.jpg"],
           "quantity": 2,
           "user": 2
         },
@@ -2864,9 +2798,7 @@
           "brand": "Samsung",
           "category": "smartphones",
           "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-          "images": [
-            "https://i.dummyjson.com/data/products/3/1.jpg"
-          ],
+          "images": ["https://i.dummyjson.com/data/products/3/1.jpg"],
           "quantity": 1,
           "user": 2,
           "id": 1
@@ -2935,9 +2867,7 @@
           "brand": "Samsung",
           "category": "smartphones",
           "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-          "images": [
-            "https://i.dummyjson.com/data/products/3/1.jpg"
-          ],
+          "images": ["https://i.dummyjson.com/data/products/3/1.jpg"],
           "quantity": 1,
           "user": 2,
           "id": 1
