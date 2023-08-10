@@ -3,6 +3,8 @@ import { Link, Navigate } from 'react-router-dom';
 import { deleteItemFromCartAsync, updateCartAsync } from '../../features/cart/cartSlice';
 import { useForm } from 'react-hook-form';
 import { updateUserAsync } from '../../features/auth/authSlice';
+import { useState } from 'react';
+import { createOrderAsync } from '../../features/order/orderSlice';
 
 const products = [
   {
@@ -52,6 +54,8 @@ const products = [
 function Checkout() {
   const { items } = useSelector((state) => state.cart);
   const { loggedInUser } = useSelector((state) => state.auth);
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [paymentMethod, setPaymentMethod] = useState('cash');
   const dispatch = useDispatch();
   const {
     register,
@@ -73,6 +77,19 @@ function Checkout() {
   const handleRemove = (e, id) => {
     e.preventDefault();
     dispatch(deleteItemFromCartAsync(id));
+  };
+
+  const handleAddress = (e) => {
+    setSelectedAddress(loggedInUser.addresses[e.target.value]);
+  };
+
+  const handlePayment = (e) => {
+    setPaymentMethod(e.target.value);
+  };
+
+  const handleOrder = (e) => {
+    const order = { items, totalAmount, totalItems, loggedInUser, paymentMethod, selectedAddress };
+    dispatch(createOrderAsync(order));
   };
 
   const onSubmit = (data) => {
@@ -218,15 +235,17 @@ function Checkout() {
                 <h2 className="text-3xl font-semibold leading-7 text-gray-900">Addresses</h2>
                 <p className="mt-1 text-sm leading-6 text-gray-600 mb-5">Choose from Existing addresses</p>
                 <ul role="list">
-                  {loggedInUser?.addresses.map((address) => (
+                  {loggedInUser?.addresses.map((address, idx) => (
                     <li
-                      key={address.phone}
+                      key={idx}
                       className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200 rounded-lg mb-5"
                     >
                       <div className="flex gap-x-4 items-center">
                         <input
                           name="address"
                           type="radio"
+                          onChange={handleAddress}
+                          value={idx}
                           className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                         />
                         <div className="min-w-0 flex-auto">
@@ -253,6 +272,9 @@ function Checkout() {
                           id="cash"
                           name="payments"
                           type="radio"
+                          onChange={handlePayment}
+                          value="cash"
+                          checked={paymentMethod === 'cash'}
                           className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                         />
                         <label htmlFor="cash" className="block text-sm font-medium leading-6 text-gray-900">
@@ -264,6 +286,9 @@ function Checkout() {
                           id="card"
                           name="payments"
                           type="radio"
+                          onChange={handlePayment}
+                          value="card"
+                          checked={paymentMethod === 'card'}
                           className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                         />
                         <label htmlFor="card" className="block text-sm font-medium leading-6 text-gray-900">
@@ -342,15 +367,13 @@ function Checkout() {
               </div>
               <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
               <div className="mt-6">
-                <Link to="/checkout">
-                  <button
-                    type="button"
-                    className="rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 w-full"
-                    onClick={() => {}}
-                  >
-                    Checkout
-                  </button>
-                </Link>
+                <button
+                  type="button"
+                  className="rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 w-full"
+                  onClick={handleOrder}
+                >
+                  Order Now
+                </button>
               </div>
               <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                 <p>
