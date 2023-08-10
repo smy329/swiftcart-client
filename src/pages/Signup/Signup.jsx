@@ -19,7 +19,7 @@ const Signup = () => {
   let from = location?.state?.from?.pathname || '/';
 
   const onSubmit = (data) => {
-    dispatch(newUser({ email: data.email, password: data.password }));
+    dispatch(newUser({ email: data.email, password: data.password, addresses: [] }));
     if (loggedInUser) {
       navigate(from, { replace: true });
     }

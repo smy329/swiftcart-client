@@ -26,3 +26,9 @@ export const checkUser = async (loginInfo) => {
     return { error: 'An error occurred while fetching user data' };
   }
 };
+
+export const updateUser = async (update) => {
+  const response = await axiosInstance.patch(`/users/${update.id}`, update);
+  console.log(response.data);
+  return response.data;
+};

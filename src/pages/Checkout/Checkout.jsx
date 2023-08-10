@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate } from 'react-router-dom';
 import { deleteItemFromCartAsync, updateCartAsync } from '../../features/cart/cartSlice';
+import { useForm } from 'react-hook-form';
+import { updateUserAsync } from '../../features/auth/authSlice';
 
 const products = [
   {
@@ -47,28 +49,17 @@ const products = [
   // More products...
 ];
 
-const addresses = [
-  {
-    name: 'John wick',
-    street: '11th Main',
-    city: 'NewWork',
-    pinCode: 110001,
-    state: 'Knoxville',
-    phone: 12312321331,
-  },
-  {
-    name: 'John Doe',
-    street: '15th Main',
-    city: 'Seattle',
-    pinCode: 560034,
-    state: 'Washington',
-    phone: 123123123,
-  },
-];
-
 function Checkout() {
   const { items } = useSelector((state) => state.cart);
+  const { loggedInUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const totalAmount = items.reduce((amount, item) => item.price * item.quantity + amount, 0);
   console.log(totalAmount);
@@ -83,12 +74,19 @@ function Checkout() {
     e.preventDefault();
     dispatch(deleteItemFromCartAsync(id));
   };
+
+  const onSubmit = (data) => {
+    //dispatch();
+    console.log(data);
+    dispatch(updateUserAsync({ ...loggedInUser, addresses: [...loggedInUser.addresses, data] }));
+    reset();
+  };
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       {!items.length && <Navigate to="/" replace />}
       <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
         <div className="lg:col-span-3">
-          <form className="bg-white px-5 py-12 mt-12">
+          <form className="bg-white px-5 py-12 mt-12" onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
                 <h2 className="text-3xl font-semibold leading-7 text-gray-900">Personal Information</h2>
@@ -97,44 +95,29 @@ function Checkout() {
                 </p>
 
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                  <div className="sm:col-span-3">
+                  <div className="sm:col-span-full">
                     <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
-                      First name
+                      Full Name
                     </label>
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="first-name"
-                        id="first-name"
-                        autoComplete="given-name"
+                        {...register('name', { required: 'Name is required' })}
+                        id="name"
+                        autoComplete="name"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
 
-                  <div className="sm:col-span-3">
-                    <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">
-                      Last name
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="last-name"
-                        id="last-name"
-                        autoComplete="family-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-4">
+                  <div className="sm:col-span-full">
                     <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                       Email address
                     </label>
                     <div className="mt-2">
                       <input
                         id="email"
-                        name="email"
+                        {...register('email', { required: 'Email is required' })}
                         type="email"
                         autoComplete="email"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -142,21 +125,18 @@ function Checkout() {
                     </div>
                   </div>
 
-                  <div className="sm:col-span-3">
-                    <label htmlFor="country" className="block text-sm font-medium leading-6 text-gray-900">
-                      Country
+                  <div className="col-span-full">
+                    <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">
+                      Phone
                     </label>
                     <div className="mt-2">
-                      <select
-                        id="country"
-                        name="country"
-                        autoComplete="country-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                      >
-                        <option>United States</option>
-                        <option>Canada</option>
-                        <option>Mexico</option>
-                      </select>
+                      <input
+                        id="phone"
+                        type="tel"
+                        {...register('phone')}
+                        autoComplete="phone"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600  sm:text-sm sm:leading-6"
+                      />
                     </div>
                   </div>
 
@@ -167,9 +147,9 @@ function Checkout() {
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="street-address"
-                        id="street-address"
-                        autoComplete="street-address"
+                        {...register('streetAddress')}
+                        id="streetAddress"
+                        autoComplete="streetAddress"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
                     </div>
@@ -182,7 +162,7 @@ function Checkout() {
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="city"
+                        {...register('city')}
                         id="city"
                         autoComplete="address-level2"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -197,7 +177,7 @@ function Checkout() {
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="region"
+                        {...register('region')}
                         id="region"
                         autoComplete="address-level1"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -212,8 +192,8 @@ function Checkout() {
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="postal-code"
-                        id="postal-code"
+                        {...register('postalCode')}
+                        id="postalCode"
                         autoComplete="postal-code"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -222,7 +202,7 @@ function Checkout() {
                 </div>
               </div>
 
-              <div className="mt-6 flex items-center justify-end gap-x-6">
+              <div className="flex items-center justify-end gap-x-6 my-0">
                 <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
                   Reset
                 </button>
@@ -238,9 +218,9 @@ function Checkout() {
                 <h2 className="text-3xl font-semibold leading-7 text-gray-900">Addresses</h2>
                 <p className="mt-1 text-sm leading-6 text-gray-600 mb-5">Choose from Existing addresses</p>
                 <ul role="list">
-                  {addresses.map((address) => (
+                  {loggedInUser?.addresses.map((address) => (
                     <li
-                      key={address.email}
+                      key={address.phone}
                       className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200 rounded-lg mb-5"
                     >
                       <div className="flex gap-x-4 items-center">
@@ -366,10 +346,7 @@ function Checkout() {
                   <button
                     type="button"
                     className="rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 w-full"
-                    onClick={() => {
-                      setShowCart(false);
-                      navigate('/');
-                    }}
+                    onClick={() => {}}
                   >
                     Checkout
                   </button>

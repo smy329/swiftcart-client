@@ -2350,14 +2350,14 @@
           "street": "11th Main",
           "city": "Banaglore",
           "state": "Karnataka",
-          "pinCode": "560034"
+          "postalCode": "560034"
         },
         {
           "name": "Jack Morris",
           "email": "jack@gmail.com",
           "city": "Delhi",
           "state": "Delhi",
-          "pinCode": "110006",
+          "postalCode": "110006",
           "phone": "12312331232",
           "street": "12th cross"
         }
@@ -2376,7 +2376,7 @@
           "street": "11th Main",
           "city": "Mumbai",
           "state": "Maharastra",
-          "pinCode": "220001"
+          "postalCode": "220001"
         }
       ],
       "id": 2
@@ -2389,17 +2389,82 @@
       "id": 3
     },
     {
-      "email": "admin@admin.com",
-      "password": "admin123@ADMIN",
+      "5": "",
+      "email": "user@user.com",
+      "password": "user123@USER",
+      "addresses": [
+        {
+          "name": "Syed Mohammad Yasir",
+          "email": "vendor@vendor.com",
+          "phone": "01833051312",
+          "streetAddress": "Chawkbazar, Chittagong",
+          "city": "Chittagong",
+          "region": "Chittagong Division",
+          "postalCode": "4000"
+        }
+      ],
       "id": 5
     },
     {
       "email": "user@user.com",
       "password": "user123@USER",
+      "addresses": [],
       "id": 5
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "title": "iPhone X",
+      "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+      "price": 1111,
+      "discountPercentage": 17.94,
+      "rating": 0,
+      "stock": 34,
+      "brand": "Apple",
+      "category": "smartphones",
+      "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/2/1.jpg",
+        "https://i.dummyjson.com/data/products/2/2.jpg",
+        "https://i.dummyjson.com/data/products/2/3.jpg",
+        "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+      ],
+      "deleted": true,
+      "loggedInUser": {
+        "email": "user@user.com",
+        "password": "user123@USER",
+        "id": 5
+      },
+      "productId": 2,
+      "quantity": 1,
+      "id": 1
+    },
+    {
+      "title": "OPPOF19",
+      "description": "OPPO F19 is officially announced on April 2021.",
+      "price": 300,
+      "discountPercentage": 17.91,
+      "rating": 0,
+      "stock": 123,
+      "brand": "OPPO",
+      "category": "smartphones",
+      "thumbnail": "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/4/1.jpg",
+        "https://i.dummyjson.com/data/products/4/2.jpg",
+        "https://i.dummyjson.com/data/products/4/3.jpg",
+        "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
+      ],
+      "loggedInUser": {
+        "email": "user@user.com",
+        "password": "user123@USER",
+        "id": 5
+      },
+      "productId": 4,
+      "quantity": 1,
+      "id": 2
+    }
+  ],
   "orders": [
     {
       "items": [
@@ -2437,7 +2502,7 @@
             "street": "11th Main",
             "city": "Banaglore",
             "state": "Karnataka",
-            "pinCode": "560034"
+            "postalCode": "560034"
           },
           {
             "name": "Abhishek R",
@@ -2446,7 +2511,7 @@
             "street": "11th Main",
             "city": "Banaglore",
             "state": "Karnataka",
-            "pinCode": "560034"
+            "postalCode": "560034"
           }
         ],
         "id": 1
@@ -2459,7 +2524,7 @@
         "street": "11th Main",
         "city": "Banaglore",
         "state": "Karnataka",
-        "pinCode": "560034"
+        "postalCode": "560034"
       },
       "status": "dispatched",
       "id": 1
@@ -2500,7 +2565,7 @@
             "street": "11th Main",
             "city": "Banaglore",
             "state": "Karnataka",
-            "pinCode": "560034"
+            "postalCode": "560034"
           },
           {
             "name": "Abhishek R",
@@ -2509,7 +2574,7 @@
             "street": "11th Main",
             "city": "Banaglore",
             "state": "Karnataka",
-            "pinCode": "560034"
+            "postalCode": "560034"
           }
         ],
         "id": 1
@@ -2522,7 +2587,7 @@
         "street": "11th Main",
         "city": "Banaglore",
         "state": "Karnataka",
-        "pinCode": "560034"
+        "postalCode": "560034"
       },
       "status": "delivered",
       "id": 2
@@ -2577,7 +2642,7 @@
             "street": "11th Main",
             "city": "Mumbai",
             "state": "Maharastra",
-            "pinCode": "220001"
+            "postalCode": "220001"
           }
         ],
         "id": 2
@@ -2590,7 +2655,7 @@
         "street": "11th Main",
         "city": "Mumbai",
         "state": "Maharastra",
-        "pinCode": "220001"
+        "postalCode": "220001"
       },
       "status": "cancelled",
       "id": 3
@@ -2632,7 +2697,7 @@
             "street": "11th Main",
             "city": "Banaglore",
             "state": "Karnataka",
-            "pinCode": "560034"
+            "postalCode": "560034"
           },
           {
             "name": "Abhishek R",
@@ -2641,7 +2706,7 @@
             "street": "11th Main",
             "city": "Banaglore",
             "state": "Karnataka",
-            "pinCode": "560034"
+            "postalCode": "560034"
           }
         ],
         "id": 1
@@ -2654,7 +2719,7 @@
         "street": "11th Main",
         "city": "Banaglore",
         "state": "Karnataka",
-        "pinCode": "560034"
+        "postalCode": "560034"
       },
       "status": "pending",
       "id": 4
@@ -2695,14 +2760,14 @@
             "street": "11th Main",
             "city": "Banaglore",
             "state": "Karnataka",
-            "pinCode": "560034"
+            "postalCode": "560034"
           },
           {
             "name": "Jack Morris",
             "email": "jack@gmail.com",
             "city": "Delhi",
             "state": "Delhi",
-            "pinCode": "110006",
+            "postalCode": "110006",
             "phone": "12312331232",
             "street": "12th cross"
           }
@@ -2717,7 +2782,7 @@
         "street": "11th Main",
         "city": "Banaglore",
         "state": "Karnataka",
-        "pinCode": "560034"
+        "postalCode": "560034"
       },
       "status": "pending",
       "id": 5
@@ -2759,14 +2824,14 @@
             "street": "11th Main",
             "city": "Banaglore",
             "state": "Karnataka",
-            "pinCode": "560034"
+            "postalCode": "560034"
           },
           {
             "name": "Jack Morris",
             "email": "jack@gmail.com",
             "city": "Delhi",
             "state": "Delhi",
-            "pinCode": "110006",
+            "postalCode": "110006",
             "phone": "12312331232",
             "street": "12th cross"
           }
@@ -2779,7 +2844,7 @@
         "email": "jack@gmail.com",
         "city": "Delhi",
         "state": "Delhi",
-        "pinCode": "110006",
+        "postalCode": "110006",
         "phone": "12312331232",
         "street": "12th cross"
       },
@@ -2837,7 +2902,7 @@
             "street": "11th Main",
             "city": "Mumbai",
             "state": "Maharastra",
-            "pinCode": "220001"
+            "postalCode": "220001"
           }
         ],
         "id": 2
@@ -2850,7 +2915,7 @@
         "street": "11th Main",
         "city": "Mumbai",
         "state": "Maharastra",
-        "pinCode": "220001"
+        "postalCode": "220001"
       },
       "status": "pending",
       "id": 7
@@ -2906,7 +2971,7 @@
             "street": "11th Main",
             "city": "Mumbai",
             "state": "Maharastra",
-            "pinCode": "220001"
+            "postalCode": "220001"
           }
         ],
         "id": 2
@@ -2919,7 +2984,7 @@
         "street": "11th Main",
         "city": "Mumbai",
         "state": "Maharastra",
-        "pinCode": "220001"
+        "postalCode": "220001"
       },
       "status": "pending",
       "id": 8
@@ -2961,7 +3026,7 @@
             "street": "11th Main",
             "city": "Mumbai",
             "state": "Maharastra",
-            "pinCode": "220001"
+            "postalCode": "220001"
           }
         ],
         "id": 2
@@ -2974,7 +3039,7 @@
         "street": "11th Main",
         "city": "Mumbai",
         "state": "Maharastra",
-        "pinCode": "220001"
+        "postalCode": "220001"
       },
       "status": "pending",
       "id": 9
@@ -3017,7 +3082,7 @@
             "street": "11th Main",
             "city": "Mumbai",
             "state": "Maharastra",
-            "pinCode": "220001"
+            "postalCode": "220001"
           }
         ],
         "id": 2
@@ -3030,7 +3095,7 @@
         "street": "11th Main",
         "city": "Mumbai",
         "state": "Maharastra",
-        "pinCode": "220001"
+        "postalCode": "220001"
       },
       "status": "pending",
       "id": 10
@@ -3073,7 +3138,7 @@
             "street": "11th Main",
             "city": "Mumbai",
             "state": "Maharastra",
-            "pinCode": "220001"
+            "postalCode": "220001"
           }
         ],
         "id": 2
@@ -3086,7 +3151,7 @@
         "street": "11th Main",
         "city": "Mumbai",
         "state": "Maharastra",
-        "pinCode": "220001"
+        "postalCode": "220001"
       },
       "status": "pending",
       "id": 11

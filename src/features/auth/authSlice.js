@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { checkUser, createUser } from './authAPI';
+import { checkUser, createUser, updateUser } from './authAPI';
 
 const initialState = {
   loggedInUser: null,
@@ -16,6 +16,12 @@ export const newUser = createAsyncThunk('auth/newUser', async (userData) => {
 
 export const checkUserAsync = createAsyncThunk('auth/checkUser', async (loginInfo) => {
   const response = await checkUser(loginInfo);
+  return response;
+});
+
+export const updateUserAsync = createAsyncThunk('auth/updateUser', async (update) => {
+  const response = await updateUser(update);
+  console.log(response);
   return response;
 });
 
@@ -46,10 +52,27 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.loggedInUser = action.payload;
-      
+
         state.error = action.payload?.error || '';
       })
       .addCase(checkUserAsync.rejected, (state, action) => {
+        state.isLoading = false;
+        state.loggedInUser = null;
+        state.isError = true;
+        state.error = action.error?.message || 'An error occurred while fetching user data';
+      })
+      .addCase(updateUserAsync.pending, (state) => {
+        state.isError = false;
+        state.isLoading = true;
+      })
+      .addCase(updateUserAsync.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.loggedInUser = action.payload;
+
+        state.error = action.payload?.error || '';
+      })
+      .addCase(updateUserAsync.rejected, (state, action) => {
         state.isLoading = false;
         state.loggedInUser = null;
         state.isError = true;
